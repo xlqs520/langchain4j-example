@@ -4,6 +4,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.xlqs.com.example.util.JwtHelper;
@@ -21,6 +22,9 @@ import java.io.IOException;
 public class AuthFilter implements Filter {
 
     private static final String TOKEN_HEADER = "X-Auth-Token";
+
+    @Value("${jwt.skip:true}")
+    private Boolean enabled;
 
     @Resource
     private JwtHelper jwtHelper;
@@ -47,10 +51,10 @@ public class AuthFilter implements Filter {
 
         String token = req.getHeader(TOKEN_HEADER);
 
-//        if (!checkToken( token)) {
-//            writeError(resp);
-//            return;
-//        }
+        if (!enabled && !checkToken( token)) {
+            writeError(resp);
+            return;
+        }
 
         chain.doFilter(request, response);
     }

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.xlqs.com.example.rag.KnowledgeService;
 import org.xlqs.com.example.rag.dto.PointBuilder;
+import org.xlqs.com.example.util.EmbeddingHelper;
 import org.xlqs.com.example.util.JwtHelper;
 import org.xlqs.com.example.util.JwtSecretGenerator;
 import org.xlqs.com.example.util.QdrantHelper;
@@ -54,24 +55,42 @@ class ExampleApplicationTests {
     @Resource
     private KnowledgeService knowledgeService;
 
+    @Resource
+    private EmbeddingHelper  embeddingHelper;
+
     @Test
     void testQdrant() {
         qdrantHelper.createCollection("test1");
 //        qdrantHelper.deleteCollection("test1");
 //        System.out.println(qdrantHelper.getCollectionInfo("test"));
-        System.out.println(Arrays.toString(embeddingModel.embed("hello world").content().vector()));
+//        System.out.println(Arrays.toString(embeddingModel.embed("hello world").content().vector()));
+    }
+
+    @Test
+    void testInsert() {
+        knowledgeService.upsert("test1", PointBuilder.builder()
+                .vector(embeddingHelper.embed("hello world"))
+                .payloads(Map.of("name", "xlqs", "age", 18))
+                .build()
+        );
     }
 
     @Test
     void testKnowledgeService() {
-//        knowledgeService.upsertPoint("test", PointBuilder.builder()
-//                        .vector(embeddingModel.embed("hello world").content().vector())
-//                .payloads(Map.of("name", "xlqs", "age", 18))
-//                .build()
-//        );
-        List<Points.ScoredPoint> points = knowledgeService.recall("test", "hello world", 3, 0.1f);
-        System.out.println(points);
+//        List<Points.ScoredPoint> points = knowledgeService.recall("test", "hello world");
+//        System.out.println(points);
+//        System.out.println(points);
+
+//        System.out.println(knowledgeService.recallMap("test1", "hello world"));
+//        System.out.println(knowledgeService.recallRagTo("test1", "hello world"));
+        knowledgeService.deletePoint("test1", "b0242b24-5afc-4f60-8096-1366a698e254");
     }
+
+    @Test
+    void testRag() {
+        System.out.println(embeddingModel.embed("hello world"));
+    }
+
 
 
 }

@@ -3,6 +3,7 @@ package org.xlqs.com.example.util;
 import io.qdrant.client.QdrantClient;
 import io.qdrant.client.grpc.Collections;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.concurrent.ExecutionException;
  */
 @Service
 @Slf4j
+@ConditionalOnProperty(prefix = "ai.rag", name = "enabled", havingValue = "true")
 public class QdrantHelper {
 
     private final QdrantClient client;

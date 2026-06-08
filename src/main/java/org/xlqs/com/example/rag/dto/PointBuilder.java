@@ -21,7 +21,6 @@ public class PointBuilder {
     Points.PointStruct.Builder builder = Points.PointStruct.newBuilder();
 
     private PointBuilder() {
-        builder.setId(PointIdFactory.id(UUID.randomUUID()));
     }
 
     public static PointBuilder builder() {
@@ -30,11 +29,6 @@ public class PointBuilder {
 
     public PointBuilder vector(float[] vector) {
         builder.setVectors(VectorsFactory.vectors(VectorFactory.vector(vector)));
-        return this;
-    }
-
-    public PointBuilder id(long id) {
-        builder.setId(PointIdFactory.id(id));
         return this;
     }
 
@@ -69,6 +63,10 @@ public class PointBuilder {
     }
 
     public Points.PointStruct build() {
+        // 💡 如果用户从头到尾没有调用过 .id(...)，这里才去触发随机生成
+        if (!builder.hasId()) {
+            builder.setId(PointIdFactory.id(UUID.randomUUID()));
+        }
         return builder.build();
     }
 }
