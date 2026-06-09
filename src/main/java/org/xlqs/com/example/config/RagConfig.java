@@ -43,7 +43,7 @@ public class RagConfig {
                 .port(6334)
                 .useTls(false)
                 .apiKey(apiKey)
-                .collectionName("test")
+                .collectionName("test1")
                 .build();
     }
 

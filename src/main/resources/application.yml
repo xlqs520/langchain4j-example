@@ -28,11 +28,10 @@ spring:
 
 ai:
   rag:
-    enabled: true
+    enabled: false
 
 jwt:
   secret: xlqs-Fv6fmMFTQiop0_C9L-lGXyF6OiurOulb5bd63nXWMAQ
-  # 可选值: [NONE, ALL, PUBLIC_ONLY]
   skip: true
 
 langchain4j:
@@ -49,18 +48,18 @@ langchain4j:
       model-name: ark-code-latest
       log-requests: true
 #      log-responses: true
-    embedding-model:
-      base-url: http://localhost:11434/v1
-      model-name: dengcao/bge-large-zh-v1.5:latest
-      log-requests: true
-      log-responses: true
-      api-key:
 #    embedding-model:
-#      base-url: https://ark.cn-beijing.volces.com/api/coding/v3
-#      api-key: ${API-KEY}
-#      model-name: doubao-embedding-vision
+#      base-url: http://localhost:11434/v1
+#      model-name: dengcao/bge-large-zh-v1.5:latest
 #      log-requests: true
-#      dimensions: 1024
+#      log-responses: true
+#      api-key:
+    embedding-model:
+      base-url: https://ark.cn-beijing.volces.com/api/coding/v3
+      api-key: ${API-KEY}
+      model-name: doubao-embedding-vision
+      log-requests: true
+      dimensions: 1024
 #      log-responses: true
 
 #logging:

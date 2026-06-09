@@ -1,0 +1,44 @@
+{
+  "properties": [
+    {
+      "name": "ai.rag.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用 RAG（检索增强生成）功能.",
+      "defaultValue": false
+    },
+    {
+      "name": "jwt.skip",
+      "type": "java.lang.Boolean",
+      "description": "是否跳过 JWT 验证，用于测试.",
+      "defaultValue": true
+    }
+  ],
+  "hints": [
+    {
+      "name": "ai.rag.enabled",
+      "values": [
+        {
+          "value": "true",
+          "description": "开启 RAG。系统启动时会加载本地文档并初始化向量库."
+        },
+        {
+          "value": "false",
+          "description": "关闭 RAG。系统不会加载本地文档节省内存与调用额度."
+        }
+      ]
+    },
+    {
+      "name": "jwt.skip",
+      "values": [
+        {
+          "value": "true",
+          "description": "跳过jwt校验."
+        },
+        {
+          "value": "false",
+          "description": "使用jwt校验."
+        }
+      ]
+    }
+  ]
+}
