@@ -14,9 +14,9 @@ import java.util.Map;
  * @since 2026/6/9
  */
 
-@RequestMapping("")
+@RequestMapping("health")
 public interface HealthController {
 
-    @GetMapping("/health")
+    @GetMapping("/check")
     Map<String, Object> healthCheck(HttpServletRequest req);
 }

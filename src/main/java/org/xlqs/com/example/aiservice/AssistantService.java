@@ -16,7 +16,8 @@ import reactor.core.publisher.Flux;
 @AiService(
         wiringMode = AiServiceWiringMode.EXPLICIT,
         streamingChatModel = "openAiStreamingChatModel",
-        contentRetriever = "contentRetriever"
+        contentRetriever = "contentRetriever",
+        tools = {"userTool"}
 )
 public interface AssistantService {
 

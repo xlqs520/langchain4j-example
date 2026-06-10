@@ -3,6 +3,7 @@ package org.xlqs.com.example.api.impl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import org.xlqs.com.example.api.LoginController;
@@ -25,6 +26,9 @@ public class LoginControllerImpl implements LoginController {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
+    @Value("${jwt.skip}")
+    private Boolean enabled;
+
     @Override
     public Result<String> login(HttpServletResponse response,LoginVo loginVo) {
 
@@ -35,7 +39,9 @@ public class LoginControllerImpl implements LoginController {
         if (loginVo.getUsername().equals("xlqs") && loginVo.getPassword().equals("xlqsnhyq521..")) {
             String Authorization = jwtHelper.generateToken(loginVo.getUsername());
             response.addHeader("X-Auth-Token", Authorization);
-            redisTemplate.opsForHash().putAll(Authorization, jwtHelper.parseToken(Authorization));
+            if (!enabled) {
+                redisTemplate.opsForHash().putAll(Authorization, jwtHelper.parseToken(Authorization));
+            }
             return Result.success("登录成功");
         }
 

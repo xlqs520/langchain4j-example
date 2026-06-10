@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,7 +25,8 @@ public class SecurityConfig {
                 customizer.redirectUri("https://xlqs.com:8080/login/oauth2/code/github")
         );
 
-        http.authorizeHttpRequests(authorize -> authorize
+        http.csrf(AbstractHttpConfigurer::disable)  // 关闭CSRF
+                .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/public/**", "/**",  "/error").permitAll()
                         .anyRequest().authenticated()
                 )

@@ -4,7 +4,6 @@ import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
 import dev.langchain4j.model.output.Response;
-import io.qdrant.client.grpc.Points;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,8 +14,6 @@ import org.xlqs.com.example.util.JwtHelper;
 import org.xlqs.com.example.util.JwtSecretGenerator;
 import org.xlqs.com.example.util.QdrantHelper;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
