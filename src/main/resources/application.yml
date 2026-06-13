@@ -7,22 +7,21 @@ springdoc:
     enabled: true
     path: /v3/api-docs
 
-
 spring:
   security:
     oauth2:
       client:
         registration:
           github:
-            client-id: Ov23liWW6wErqTVejoub
-            client-secret: 60942fc6380f22a3ff8eca6b5814f1375101680d
-            redirect-uri: "{baseUrl}/login/oauth2/code/github"
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            redirect-uri: ${REDIRECT_URI}
 
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/langchain4j?currentSchema=service&stringtype=unspecified
-    username: xlqs
-    password: xlqsnhyq521..
+    username: ${DATASOURCE_USER}
+    password: ${DATABASE_PASSWORD}
   data:
     redis:
       host: xlqs.com
@@ -38,7 +37,7 @@ spring:
     qdrant:
       host: xlqs.com
       port: 6334 # gRPC 默认端口是 6334，HTTP 默认是 6333
-      api-key: Xlqsnhyq521.. # 如果配置了权限校验，没有则留空
+      api-key: ${QDRANT_PASSWORD} # 如果配置了权限校验，没有则留空
 
 # MyBatis-Plus 相关配置
 mybatis-plus:
@@ -57,9 +56,14 @@ mybatis-plus:
 ai:
   rag:
     enabled: false
+  mcp:
+    github:
+      key: github-mcp-server
+      url: https://api.githubcopilot.com/mcp/
+      token: ${MCP_TOKEN}
 
 jwt:
-  secret: xlqs-Fv6fmMFTQiop0_C9L-lGXyF6OiurOulb5bd63nXWMAQ
+  secret: ${JWT_SECRET}
   skip: true
 
 langchain4j:
@@ -90,6 +94,6 @@ server:
     enabled: true
     key-store: classpath:certs/xlqs.p12
     key-store-type: PKCS12
-    key-store-password: Xlqsnhyq521..
+    key-store-password: ${SSL.PASSWORD}
   port: 8080
 

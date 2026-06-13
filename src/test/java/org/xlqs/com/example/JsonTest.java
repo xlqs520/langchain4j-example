@@ -98,4 +98,35 @@ public class JsonTest {
         String jsonStr = response.aiMessage().text();
         System.out.println(jsonStr);
     }
+
+
+//    @Test
+//    void test4() {
+//        var sdk = new InfisicalSdk(
+//                new SdkConfig.Builder()
+//                        .withSiteUrl("http://localhost:8080") // 本地 Docker 地址
+//                        .build()
+//        );
+//
+//        try {
+//            // 使用环境变量读取，避免硬编码
+//            sdk.Auth().UniversalAuthLogin(
+//                    "db8397c6-4297-4a00-bff1-3a7e90a2a58e",
+//                    "a47e54e02e5e56d111907407ab3d6e882c7ed7e9b315bfb23625367eb6afa7ac"
+//            );
+//
+//            var secret = sdk.Secrets().GetSecret(
+//                    "apikey",
+//                    "c4f56d5a-4874-4006-9398-ef4478f7776c",
+//                    "dev",
+//                    "/",
+//                    null, null, null
+//            );
+//
+//            System.out.println("成功获取: " + secret.getSecretValue());
+//
+//        } catch (Exception e) {
+//            System.err.println("连接 Infisical 失败: " + e.getMessage());
+//        }
+//    }
 }

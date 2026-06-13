@@ -1,5 +1,6 @@
 package org.xlqs.com.example.api;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.xlqs.com.example.ai.dto.Person;
  * @since 2026/6/13
  */
 @RequestMapping("/structured")
+@Hidden
 @Tag(name = "结构化接口", description = "结构化接口")
 public interface StructuredController {
 
