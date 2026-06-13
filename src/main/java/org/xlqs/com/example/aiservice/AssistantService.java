@@ -3,6 +3,7 @@ package org.xlqs.com.example.aiservice;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.spring.AiService;
 import dev.langchain4j.service.spring.AiServiceWiringMode;
+import org.xlqs.com.example.ai.dto.Person;
 import reactor.core.publisher.Flux;
 
 /**
@@ -16,6 +17,7 @@ import reactor.core.publisher.Flux;
 @AiService(
         wiringMode = AiServiceWiringMode.EXPLICIT,
         streamingChatModel = "openAiStreamingChatModel",
+        chatModel = "openAiChatModel",
         contentRetriever = "contentRetriever",
         tools = {"userTool"}
 )
@@ -26,4 +28,9 @@ public interface AssistantService {
 
     @SystemMessage(fromResource = "prompts/system.md")
     Flux<String> chatV2(String question);
+
+    @SystemMessage(fromResource = "prompts/generateJson.md")
+    String generateJson(String question);
+
+    Person generatePerson(String question);
 }

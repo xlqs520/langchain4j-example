@@ -24,4 +24,5 @@ public interface ChatV1Controller {
     @GetMapping("/v2")
     @Operation(summary = "对话接口 v2")
     Flux<String> chatV2(String question);
+
 }

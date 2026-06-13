@@ -67,8 +67,8 @@ langchain4j:
     chat-model:
       base-url: https://ark.cn-beijing.volces.com/api/coding/v3
       api-key: ${API-KEY}
-#      model-name: ark-code-latest
-      model-name: deepseek-v3.2
+      model-name: ark-code-latest
+#      model-name: deepseek-v3.2 支持jsonschema
       log-requests: true
 #      log-responses: true
     streaming-chat-model:
